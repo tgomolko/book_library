@@ -1,7 +1,18 @@
 <section class="section">
   <div class="columns is-centered">
+
     <div class="column is-6 product-section">
+      <p class="is-pulled-right">PRODUCT</p>
       <p class="title is-5"><%= @product.name %>
+      </p>
+      <%= link_to "Add pricing plan", new_plan_path(product_id: @product), class: "button is-link is-outlined" %>
+    </div>
+  </div>
+
+  <div class="columns is-centered">
+    <div class="column is-6 product-section">
+      <p class="title is-5">Details
+
         <%= link_to product_path(@product), method: :delete, title: "delete product", data: { confirm: "Are you sure "} do %>
           <span class="is-pulled-right"><i class="fa fa-trash fa" aria-hidden="true"></i></span>
         <% end %>
@@ -9,13 +20,8 @@
         <%= link_to edit_product_path(@product) do %>
           <span class="is-pulled-right"><i class="fa fa-pencil" aria-hidden="true"></i></span>
         <% end %>
-      </p>
-    </div>
-  </div>
 
-  <div class="columns is-centered">
-    <div class="column is-6 product-section">
-      <p class="title is-5">Details</p>
+      </p>
 
       <hr/>
 
@@ -61,6 +67,19 @@
     <div class="column is-6 product-section">
       <p class="title is-5">Pricing plans</p>
       <hr/>
+
+      <% @product.plans.each do |plan|%>
+        <%= link_to plan_path(plan) do %>
+          <div class="columns">
+
+            <div class="column">
+              <%= plan.nickname %>
+              <%= plan.currency %> <%= plan.amount %> / <%= plan.interval %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+
     </div>
   </div>
 </section>

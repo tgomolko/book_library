@@ -3,16 +3,16 @@
 <div class="columns is-centered">
   <div class="column is-4">
 
-  <% @products.each do |product| %>
+  <% @plans.each do |plan|%>
     <div class="list is-hoverable">
       <div class="list-item">
-      <%= link_to product.name, product_path(product) %>
+      <%= link_to plan.nickname, plan_path(plan) %>
 
-      <%= link_to product_path(product), method: :delete, title: "delete product", data: { confirm: "Are you sure "} do %>
+      <%= link_to plan_path(plan), method: :delete, title: "delete plan", data: { confirm: "Are you sure "} do %>
         <span class="is-pulled-right"><i class="fa fa-trash fa" aria-hidden="true"></i></span>
         <% end %>
 
-      <%= link_to edit_product_path(product), title: "edit product" do %>
+      <%= link_to edit_plan_path(plan), title: "edit plan" do %>
         <span class="is-pulled-right"><i class="fa fa-pencil fa" aria-hidden="true"></i></span>
       <% end %>
 

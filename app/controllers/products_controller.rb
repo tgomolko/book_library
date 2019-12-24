@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   before_action :load_product, only: [:show, :edit, :update, :destroy]
 
   def index
-    @products = Product.all
+    @products = Product.includes(:plans)
   end
 
   def new

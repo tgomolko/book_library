@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   get 'admin', to: 'admin#dashboard'
 
   resources :products
+  resources :plans
 end
