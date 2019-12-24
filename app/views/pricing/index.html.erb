@@ -15,12 +15,7 @@
                 <div class="plan-item">Duration one <%= plan.interval %> </div>
               </div>
               <div class="plan-footer">
-
-                <%= form_tag "#", id: "add-bank-card" do %>
-                  <%= hidden_field_tag(:plan_id, plan.id) %>
-                  <%= submit_tag "Subscribe", class: "button is-success is-rounded" %>
-                <% end %>
-
+                <%= link_to "Subscribe", new_subscription_path(plan_id: plan.id), class: "button is-primary is-rounded" %>
               </div>
           </div>
         <% end %>
