@@ -8,4 +8,5 @@ Rails.application.routes.draw do
 
   resources :products
   resources :plans
+  resources :pricing, only: :index
 end
