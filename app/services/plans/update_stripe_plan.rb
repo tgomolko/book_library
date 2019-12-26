@@ -7,8 +7,7 @@ class UpdateStripePlan
   end
 
   def call
-   # plan = Stripe::Plan.retrieve(plan_stripe_id)
-    Stripe::Plan.update(plan_stripe_id, prepare_params)
+   # Stripe::Plan.update(plan_stripe_id, prepare_params.to_h)
   end
 
   private

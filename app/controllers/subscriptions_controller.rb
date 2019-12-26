@@ -15,7 +15,7 @@ class SubscriptionsController < ApplicationController
       @subscription.save
     end
 
-    redirect_to root_path, notice: 'You have successfully subscribe'
+    redirect_to subscriptions_path, notice: 'You have successfully subscribe'
 
     rescue Stripe::StripeError => e
       flash.alert = e.message
