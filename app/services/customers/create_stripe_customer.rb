@@ -7,13 +7,11 @@ class CreateStripeCustomer
   end
 
   def call
-    binding.pry
     ActiveRecord::Base.transaction do
       customer = Stripe::Customer.create({"email": current_user.email})
       current_user.update(stripe_id: customer.id)
       AttachCustomerPaymentMethod.new(customer, card_token).call
     end
-    binding.pry
 
     rescue ActiveRecord::Rollback, Stripe::StripeError => e
       flash.alert = e.message

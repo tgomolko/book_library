@@ -57,7 +57,6 @@ class PlansController < ApplicationController
     @plan = Plan.find(params[:id])
   end
 
-
   def plan_params
     params.require(:plan).permit(:nickname, :product_id, :currency, :interval, :stripe_id, :amount)
   end
