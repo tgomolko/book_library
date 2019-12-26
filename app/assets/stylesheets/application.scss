@@ -26,3 +26,26 @@
 .fa{
   margin-right: 8px;
 }
+
+.list:not(:last-child){
+  margin-bottom: 0;
+}
+
+.sub-text{
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.sub-title-text{
+  font-size: 18px;
+  font-weight: 400;
+  font-feature-settings: "pnum";
+  font-variant: proportional-nums;
+  color: #1a1f36;
+}
+
+.sub-title-small{
+  color: #697386;
+  font-weight: 400;
+  font-size: 14px;
+}
