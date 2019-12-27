@@ -62,7 +62,7 @@ document.addEventListener("turbolinks:load", function() {
     hiddenInput.setAttribute('value', token.id);
     form.appendChild(hiddenInput);
 
-    ["type", "last4", "exp_month", "exp_year"].forEach(function(field) {
+    ["last4", "exp_month", "exp_year", "brand"].forEach(function(field) {
       addCardField(form, token, field);
     });
 
@@ -72,7 +72,7 @@ document.addEventListener("turbolinks:load", function() {
   function addCardField(form, token, field) {
     let hiddenInput = document.createElement('input');
     hiddenInput.setAttribute('type', 'hidden');
-    hiddenInput.setAttribute('name', "user[card_" + field + "]");
+    hiddenInput.setAttribute('name', "card[" + field + "]");
     hiddenInput.setAttribute('value', token.card[field]);
     form.appendChild(hiddenInput);
   }

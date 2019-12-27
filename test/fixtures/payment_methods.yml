@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: 
+  stripe_id: MyString
+  number: MyString
+  exp_month: 1
+  exp_year: 1
+  cvc: 1
+  payment_method_type: MyString
+
+two:
+  user: 
+  stripe_id: MyString
+  number: MyString
+  exp_month: 1
+  exp_year: 1
+  cvc: 1
+  payment_method_type: MyString

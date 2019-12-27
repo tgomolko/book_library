@@ -1,14 +1,12 @@
 <div class="section">
   <div class="columns is-centered">
     <div class="column is-4">
-      <h1 class="title is-3">Subscribe</h1>
-      <hr />
-      <p>Chosen plan: <strong><%= @plan.nickname %></strong>
+      <h1 class="title is-3">Add payment method</h1>
+
       <hr/>
 
-      <%= form_tag subscriptions_path, id: "payment-form" do |form| %>
-      <%# binding.pry %>
-        <% if current_user.payment_methods.blank? %>
+      <%= form_tag create_payment_method_path, id: "payment-form" do |form| %>
+
         <div class="field">
           <label for="card-element" class="label">Enter credit or debit card</label>
 
@@ -17,11 +15,11 @@
           </div>
 
           <div id="card-errors" role="alert"></div>
-          <% end %>
-          <%= hidden_field_tag :plan_id, @plan.id %>
+
+          <%= hidden_field_tag :payment_method_type, "card" %>
 
         </br>
-          <button class="button is-fullwidth is-link">Submit</button>
+          <button class="button  is-link">Submit</button>
         </div>
 
       <% end %>

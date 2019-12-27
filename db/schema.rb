@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_26_095247) do
+ActiveRecord::Schema.define(version: 2019_12_26_150630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "payment_methods", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "stripe_id"
+    t.string "last4"
+    t.integer "exp_month"
+    t.integer "exp_year"
+    t.string "brand"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_payment_methods_on_user_id"
+  end
 
   create_table "plans", force: :cascade do |t|
     t.string "nickname"
@@ -61,6 +73,7 @@ ActiveRecord::Schema.define(version: 2019_12_26_095247) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "payment_methods", "users"
   add_foreign_key "plans", "products"
   add_foreign_key "subscriptions", "products"
   add_foreign_key "subscriptions", "users"
