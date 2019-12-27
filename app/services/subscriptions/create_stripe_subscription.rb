@@ -9,7 +9,6 @@ class CreateStripeSubscription
   end
 
   def call
-    binding.pry
     CreateStripeCustomer.new(current_user, stripe_token).call if current_user.payment_methods.blank?
 
     ActiveRecord::Base.transaction do
