@@ -17,7 +17,7 @@ class SubscriptionsController < ApplicationController
 
     redirect_to subscriptions_path, notice: 'You have successfully subscribe'
 
-    rescue Stripe::StripeError => e
+    rescue Stripe::StripeError, ActiveRecord::Rollback => e
       flash.alert = e.message
       render :new
   end
@@ -32,6 +32,7 @@ class SubscriptionsController < ApplicationController
 
     rescue ActiveRecord::Rollback, Stripe::StripeError => e
       flash.alert = e.message
+      redirect_to subscriptions_path
   end
 
   private

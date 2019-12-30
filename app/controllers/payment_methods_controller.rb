@@ -3,16 +3,22 @@ class PaymentMethodsController  < ApplicationController
   before_action :load_payment_method, only: [:show, :destroy]
 
   def new_card
-    redirect_to root_path, notice: "You have already had payment method" and return unless current_user.payment_methods.any?
+    #redirect_to root_path, notice: "You have already had payment method" and return unless current_user.payment_methods.any?
+  end
+
+  def cards
+    @cards = current_user.payment_methods
   end
 
   def create_card
+    @payment_method = current_user.payment_methods.build(card_params)
+
     ActiveRecord::Base.transaction do
       CreateStripeCustomer.new(current_user, params[:stripeToken]).call
-      @payment_method = current_user.payment_methods.build(card_params).save
+      @payment_method.save
     end
 
-    redirect_to show_card(@payment_method), notice: 'You have successfully added payment_method'
+    redirect_to show_card_path(@payment_method), notice: 'You have successfully added card'
 
     rescue Stripe::StripeError => e
       flash.alert = e.message

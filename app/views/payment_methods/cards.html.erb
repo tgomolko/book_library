@@ -3,7 +3,7 @@
 <div class="section">
   <div class="container">
     <div class="columns is-centered">
-      <h1 class="title is-3">Subscriptions</h1>
+      <h1 class="title is-3">Cards</h1>
     </div>
   </div>
 </div>
@@ -14,49 +14,44 @@
       <div class="list-item">
         <div class="columns">
 
-          <div class="column is-4">
-            <p class="sub-text">PRODUCT</p>
+          <div class="column ">
+            <p class="sub-text">Brand</p>
           </div>
 
-          <div class="column is-4">
-            <p class="sub-text">PLAN</p>
+          <div class="column ">
+            <p class="sub-text">Number</p>
           </div>
 
-          <div class="column is-4">
-            <p class="sub-text">CREATED</p>
+          <div class="column ">
+            <p class="sub-text">Exparies</p>
           </div>
 
-          <div class="column is-4">
-             <p></p>
-          </div>
         </div>
     </div>
 
-  <% @subscriptions.each do |subscription| %>
+  <% @cards.each do |card| %>
     <div class="list is-hoverable">
       <div class="list-item">
         <div class="columns">
 
           <div class="column">
-            <%= subscription.product.name %>
+            <%= card.brand %>
           </div>
-
 
            <div class="column">
-            <%= subscription.plan.nickname %>
+            <p>****<%= card.last4 %></p>
           </div>
-
 
            <div class="column">
-            <%= subscription.created_at.strftime("%d/%m/%Y, %H:%M") %>
-          </div>
+            <%= card.exp_month %>/<%= card.exp_year %></span>
 
-          <div class="column is-2">
-            <%= link_to subscription_path(subscription), method: :delete, title: "cancel subscription", data: { confirm: "Are you sure "} do %>
+
+
+            <%= link_to remove_card_path(card), method: :delete, title: "remove card", data: { confirm: "Are you sure "} do %>
               <span class="is-pulled-right"><i class="fa fa-times fa" aria-hidden="true"></i></span>
             <% end %>
 
-            <%= link_to subscription_path(subscription) do %>
+            <%= link_to card_path(card) do %>
               <span class="is-pulled-right"><i class="fa fa-eye" aria-hidden="true"></i></span>
             <% end %>
           </div>
