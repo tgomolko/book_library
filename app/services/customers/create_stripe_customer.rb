@@ -14,8 +14,5 @@ class CreateStripeCustomer
       end
       AttachCustomerPaymentMethod.new(current_user.stripe_id, card_token).call
     end
-
-    rescue ActiveRecord::Rollback, Stripe::StripeError => e
-      flash.alert = e.message
   end
 end

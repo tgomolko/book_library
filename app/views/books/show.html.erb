@@ -1,0 +1,21 @@
+<div class="section">
+  <div class="columns">
+    <div class="column is-4">
+      <% #binding.pry %>
+      <%= image_tag @book.image.thumb.url, class: "image is-3by4" %>
+    </div>
+    <div class="column">
+      <h1 class="title is-2"><%= @book.title %><h1>
+
+        <div class="content">
+          <%#= render 'book-controls', book: @book %>
+          <p><strong>Description:</strong></p>
+          <%= @book.description %>
+        </div>
+
+      <% #if current_user.admin? %>
+        <%= link_to 'Edit', edit_book_path(@book) %> |
+      <% #end %>
+      </div>
+    </div>
+</div>

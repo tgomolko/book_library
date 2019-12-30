@@ -33,6 +33,10 @@ gem 'stripe', '~> 3.13'
 gem 'bulma-extensions-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'carrierwave', '~> 2.0'
+gem 'mini_magick', '>= 4.9.5'
+gem "paperclip", '~> 6.1'
+gem 'paperclip-ghostscript', '~> 0.1.0'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
