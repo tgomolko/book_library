@@ -1,0 +1,31 @@
+ <% @cards.each do |card| %>
+      <div class="list is-hoverable">
+        <div class="list-item">
+          <div class="columns">
+
+            <div class="column">
+              <%= card.brand %>
+            </div>
+
+             <div class="column">
+              <p>****<%= card.last4 %></p>
+            </div>
+
+             <div class="column">
+              <%= card.exp_month %>/<%= card.exp_year %></span>
+
+
+
+              <%= link_to remove_card_path(card), method: :delete, title: "remove card", data: { confirm: "Are you sure "} do %>
+                <span class="is-pulled-right"><i class="fa fa-times fa" aria-hidden="true"></i></span>
+              <% end %>
+
+              <%= link_to card_path(card) do %>
+                <span class="is-pulled-right"><i class="fa fa-eye" aria-hidden="true"></i></span>
+              <% end %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    <% end %>

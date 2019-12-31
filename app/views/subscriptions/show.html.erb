@@ -61,8 +61,14 @@
         <div class="columns">
 
           <div class="column">
-            <span class="sub-title-text"><%= @subscription.product.name %> / <%= @subscription.plan.nickname %></br></span>
-            <span class="sub-title-small"><%= @subscription.plan.amount / 100 %> <%= @subscription.plan.currency %>/ <%= @subscription.plan.interval %></span>
+            <span class="sub-title-text">
+              <%= @subscription.product.name %> / <%= @subscription.plan.nickname %>
+              </br>
+            </span>
+            <span class="sub-title-small">
+              <%= @subscription.plan.amount / 100 %>
+              <%= @subscription.plan.currency %>/ <%= @subscription.plan.interval %>
+            </span>
           </div>
         </div>
       <% end %>

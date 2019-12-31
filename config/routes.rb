@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :books
   get 'home/index'
-  root 'home#index'
+  root 'books#index'
 
   devise_for :users, controllers: { registrations: 'registrations' }
 

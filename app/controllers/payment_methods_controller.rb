@@ -18,7 +18,7 @@ class PaymentMethodsController  < ApplicationController
       @payment_method.save
     end
 
-    redirect_to show_card_path(@payment_method), notice: 'You have successfully added card'
+    redirect_to card_path(@payment_method), notice: 'You have successfully added card'
 
     rescue Stripe::StripeError => e
       flash.alert = e.message
@@ -31,7 +31,7 @@ class PaymentMethodsController  < ApplicationController
       @payment_method.destroy
     end
 
-    redirect_to subscriptions_path, notice: 'You have successfully remove card'
+    redirect_to cards_path, notice: 'You have successfully remove card'
 
     rescue Stripe::StripeError => e
       flash.alert = e.message

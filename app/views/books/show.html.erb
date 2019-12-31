@@ -1,21 +1,37 @@
 <div class="section">
-  <div class="columns">
-    <div class="column is-4">
-      <% #binding.pry %>
-      <%= image_tag @book.image.thumb.url, class: "image is-3by4" %>
+
+  <div class="columns is-centered">
+    <div class="column is-2">
+      <%= image_tag @book.image.thumb.url if @book.image.url %>
     </div>
-    <div class="column">
-      <h1 class="title is-2"><%= @book.title %><h1>
 
-        <div class="content">
-          <%#= render 'book-controls', book: @book %>
-          <p><strong>Description:</strong></p>
-          <%= @book.description %>
-        </div>
+    <div class="column is-4">
+      <h1 class="title is-3"><%= @book.title %></h1>
+      <p><strong>Description:</strong></p>
+        <%= @book.description %>
+      <p><strong>Author:</strong></p>
+        <%= @book.author %>
+    </div>
+  </div>
 
-      <% #if current_user.admin? %>
-        <%= link_to 'Edit', edit_book_path(@book) %> |
-      <% #end %>
+  <div class="columns is-centered">
+
+    <div class="column is-2">
+      <div class="controls pt2">
+        <% if current_user.admin? %>
+          <%= link_to 'Edit', edit_book_path(@book), class:"button is-small is-rounded" %>
+          <%= link_to 'Delete', @book, method: :delete, data: { confirm: "Are you sure? "}, class:"button is-small is-rounded" %>
+        <% end %>
       </div>
     </div>
+
+    <div class="column is-3">
+      <% if current_user.has_library_access? && @book.document_file_name %>
+        <%= link_to @book.document.url, { download: @book.document_file_name } do %>
+          <span class="is-pulled-right"><i class="fa fa-download" aria-hidden="true"></i></span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
 </div>

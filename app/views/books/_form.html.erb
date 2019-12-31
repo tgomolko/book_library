@@ -1,7 +1,6 @@
 <%= simple_form_for @book, html: { multipart: true } do |f| %>
 <%= f.error_notification %>
-<%#= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
+<%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="field">
     <div class="control">
@@ -44,6 +43,17 @@
   <output id="list"></output>
   <hr/>
 
+  <div class="field">
+    <div class="control">
+      <label class="label">Add Book file</label>
+        <div class="file">
+            <label class="file-label">
+              <%= f.input :document, as: :file, input_html: { class: "pdf-btn" }, label: false, wrapper: false %>
+            </label>
+          </div>
+      </label>
+    </div>
+  </div>
 
   <%= f.button :submit, class:"button is-dark" %>
 <% end %>

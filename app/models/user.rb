@@ -8,7 +8,11 @@ class User < ApplicationRecord
   has_many :payment_methods, dependent: :destroy
   has_many :books, dependent: :destroy
 
-  def subscribed?(product)
-    products.include?(product)
+  # def subscribed?(product)
+  #   products.include?(product)
+  # end
+
+  def has_library_access?
+    subscriptions.any?
   end
 end
