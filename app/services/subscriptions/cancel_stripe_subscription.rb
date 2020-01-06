@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CancelStripeSubscription
   attr_reader :subscription_stripe_id
 

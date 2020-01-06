@@ -12,18 +12,15 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(product_params)
+    result = CreateProduct.call(product_params: product_params)
 
-    CreateStripeProduct.new(@product).call
-
-    if @product.save
-      redirect_to @product, notice: 'Product was successfully created.'
+    if result.success?
+      redirect_to result.product, notice: "Product was successfully created"
     else
+      @product = Product.new(product_params)
+      flash.now.alert = result.message
       render :new
     end
-
-    rescue Stripe::StripeError => e
-      flash.alert = e.message
   end
 
   def update
@@ -36,15 +33,13 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    ActiveRecord::Base.transaction do
-      @product.destroy
-      DestroyStripeProduct.new(@product.stripe_id).call
+    result = DestroyProduct.call(product: @product)
+
+    if result.success?
+      redirect_to products_url, notice: 'Product was successfully destroyed.'
+    else
+      redirect_to result.product, alert: "#{result.message}"
     end
-
-    redirect_to products_url, notice: 'Product was successfully destroyed.'
-
-    rescue Stripe::StripeError => e
-      flash.alert = e.message
   end
 
   private
