@@ -13,7 +13,7 @@ class PaymentMethodsController  < ApplicationController
   def create_card
     @payment_method = current_user.payment_methods.build(card_params)
 
-    ActiveRecord::Base.transaction do
+    PaymentMethod.transaction do
       CreateStripeCustomer.new(current_user, params[:stripeToken]).call
       @payment_method.save
     end
@@ -26,7 +26,7 @@ class PaymentMethodsController  < ApplicationController
   end
 
   def destroy
-    ActiveRecord::Base.transaction do
+    PaymentMethod.transaction do
       DeattachPaymentMethod.new(current_user).call
       @payment_method.destroy
     end

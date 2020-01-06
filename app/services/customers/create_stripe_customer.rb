@@ -7,12 +7,10 @@ class CreateStripeCustomer
   end
 
   def call
-    ActiveRecord::Base.transaction do
-      unless current_user.stripe_id
-        customer = Stripe::Customer.create({"email": current_user.email})
-        current_user.update(stripe_id: customer.id)
-      end
-      AttachCustomerPaymentMethod.new(current_user.stripe_id, card_token).call
+    unless current_user.stripe_id
+      customer = Stripe::Customer.create({"email": current_user.email})
+      current_user.update(stripe_id: customer.id)
     end
+    AttachCustomerPaymentMethod.new(current_user.stripe_id, card_token).call
   end
 end
