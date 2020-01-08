@@ -9,15 +9,7 @@ module Stripe
     end
 
     def call
-      Stripe::Product.create(build_stripe_product_params)
-    end
-
-    private
-
-    def build_stripe_product_params
-      stripe_product_params = product_params
-      stripe_product_params[:type] = stripe_product_params.delete :product_type
-      stripe_product_params
+      Stripe::Product.create(name: product_params[:name], type: product_params[:product_type])
     end
   end
 end

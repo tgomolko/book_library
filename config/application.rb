@@ -11,7 +11,7 @@ module BookLibrary
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
    # config.autoload_paths += %W(#{config.root}/services/**/)
-    config.autoload_paths += Dir["#{config.root}/interactors/**/"]
+    config.autoload_paths += Dir[Rails.root.join('app','interactors','{*/}')]
     config.autoload_paths += Dir[Rails.root.join('app', 'services', '{*/}')]
     config.autoload_paths += Dir[Rails.root.join('lib','services','stripe', '{*/}')]
     config.autoload_paths += Dir["#{config.root}/lib/services/**/"]

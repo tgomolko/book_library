@@ -1,4 +1,4 @@
-class CreateStripePlan
+class ScreateStripePlan
   attr_reader :plan, :product_stripe_id, :plan_params
 
   def initialize(plan, plan_params, product_stripe_id)

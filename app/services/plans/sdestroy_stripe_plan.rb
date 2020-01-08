@@ -1,4 +1,4 @@
-class DestroyStripePlan
+class SdestroyStripePlan
   attr_reader :plan_stripe_id
 
   def initialize(plan_stripe_id)

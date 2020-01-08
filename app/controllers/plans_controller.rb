@@ -12,18 +12,15 @@ class PlansController < ApplicationController
   end
 
   def create
-    @plan = Plan.new(plan_params)
+    result = CreatePlan.call(plan_params: plan_params, product_stripe_id: @product.stripe_id)
 
-    CreateStripePlan.new(@plan, plan_params, @product.stripe_id).call
-
-    if @plan.save
-      redirect_to @plan, notice: 'Plan was successfully created.'
+    if result.success?
+      redirect_to result.plan, notice: "Plan was successfully created"
     else
+      @plan = Plan.new(plan_params)
+      flash.now.alert = result.message
       render :new
     end
-
-    rescue Stripe::StripeError => e
-      flash.alert = e.message
   end
 
   def update
@@ -40,15 +37,13 @@ class PlansController < ApplicationController
   end
 
   def destroy
-    ActiveRecord::Base.transaction do
-      @plan.destroy
-      DestroyStripePlan.new(@plan.stripe_id).call
+    result = DestroyPlan.call(plan: @plan)
+
+    if result.success?
+      redirect_to plans_url, notice: 'Plan was successfully destroyed.'
+    else
+      redirect_to result.plan, alert: "#{result.message}"
     end
-
-    redirect_to plans_url, notice: 'Plan was successfully destroyed.'
-
-    rescue ActiveRecord::Rollback, Stripe::StripeError => e
-      flash.alert = e.message
   end
 
   private

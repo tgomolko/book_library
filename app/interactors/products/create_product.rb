@@ -9,8 +9,7 @@ class CreateProduct
     Product.transaction do
       @stripe_product = Stripe::CreateStripeProduct.new(product_params).call
 
-      product = Product.create(build_product_attrs)
-      context.product = product
+      context.product = Product.create(build_product_params)
     end
 
     rescue ActiveRecord::Rollback, Stripe::StripeError => e
@@ -19,9 +18,7 @@ class CreateProduct
 
   private
 
-  def build_product_attrs
-    product_params[:product_type] = product_params.delete :type
-    product_params[:stripe_id] = @stripe_product.id
-    product_params
+  def build_product_params
+    product_params.merge(stripe_id: @stripe_product.id)
   end
 end
