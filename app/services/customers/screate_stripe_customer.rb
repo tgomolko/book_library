@@ -1,4 +1,4 @@
-class CreateStripeCustomer
+class ScreateStripeCustomer
   attr_reader :current_user, :card_token
 
   def initialize(current_user, card_token)

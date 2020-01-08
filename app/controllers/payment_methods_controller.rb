@@ -11,31 +11,25 @@ class PaymentMethodsController  < ApplicationController
   end
 
   def create_card
-    @payment_method = current_user.payment_methods.build(card_params)
+    result = CreateCard.call(card_params: card_params, current_user: current_user, card_token: params[:stripeToken])
 
-    PaymentMethod.transaction do
-      CreateStripeCustomer.new(current_user, params[:stripeToken]).call
-      @payment_method.save
+    if result.success?
+      redirect_to card_path(result.payment_method), notice: 'You have successfully added card'
+    else
+      @payment_method = PaymentMethod.new(card_params)
+      flash.now.alert = result.message
+      render :new_card
     end
-
-    redirect_to card_path(@payment_method), notice: 'You have successfully added card'
-
-    rescue Stripe::StripeError => e
-      flash.alert = e.message
-      render :create_card
   end
 
   def destroy
-    PaymentMethod.transaction do
-      DeattachPaymentMethod.new(current_user).call
-      @payment_method.destroy
+    result = DestroyCard.call(payment_method: @payment_method, customer_id: current_user.stripe_id)
+
+    if result.success?
+      redirect_to cards_path, notice: 'You have successfully remove card'
+    else
+      redirect_to card_path(result.payment_method), alert: "#{result.message}"
     end
-
-    redirect_to cards_path, notice: 'You have successfully remove card'
-
-    rescue Stripe::StripeError => e
-      flash.alert = e.message
-      render :show
   end
 
   private

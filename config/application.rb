@@ -15,7 +15,7 @@ module BookLibrary
     config.autoload_paths += Dir[Rails.root.join('app', 'services', '{*/}')]
     config.autoload_paths += Dir[Rails.root.join('lib','services','stripe', '{*/}')]
     config.autoload_paths += Dir["#{config.root}/lib/services/**/"]
-    config.autoload_paths << File.join(config.root, "lib")
+    #config.autoload_paths << File.join(config.root, "lib")
     #config.autoload_paths += Dir[Rails.root.join('app', 'services', '{*/}')]
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

@@ -9,7 +9,7 @@ class CreateStripeSubscription
   end
 
   def call
-    CreateStripeCustomer.new(current_user, stripe_token).call if current_user.payment_methods.blank?
+    #CreateStripeCustomer.new(current_user, stripe_token).call if current_user.payment_methods.blank?
 
     ActiveRecord::Base.transaction do
       stripe_subscription = Stripe::Subscription.create({ customer: current_user.stripe_id, items: [{plan: plan_stripe_id}] })
