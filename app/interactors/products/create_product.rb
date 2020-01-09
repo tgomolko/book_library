@@ -7,7 +7,7 @@ class CreateProduct
 
   def call
     Product.transaction do
-      @stripe_product = Stripe::CreateStripeProduct.new(product_params).call
+      @stripe_product = Stripe::Products::CreateStripeProduct.new(product_params).call
 
       context.product = Product.create(build_product_params)
     end

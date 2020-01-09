@@ -8,36 +8,30 @@ class SubscriptionsController < ApplicationController
   end
 
   def create
-  #  @subscription = current_user.subscriptions.build(subscription_params)
-
     result = CreateSubscription.call(
       subscription_params: subscription_params,
-      current_user: current_user
+      current_user: current_user,
       stripe_token: params[:stripeToken],
+      plan_stripe_id: @plan.stripe_id
     )
 
-   # ActiveRecord::Base.transaction do
-    #  CreateStripeSubscription.new(@subscription, @plan.stripe_id, current_user, params[:stripeToken]).call
-     # @subscription.save
-   # end
-
-    #redirect_to subscriptions_path, notice: 'You have successfully subscribe'
-
-    #rescue Stripe::StripeError => e
-     # flash.alert = e.message
-      #render :new
+    if result.success?
+      redirect_to result.subscription, notice: "You was successfully subsribed"
+    else
+      flash.now.alert = result.message
+      render :new
+    end
   end
 
+
   def destroy
-    ActiveRecord::Base.transaction do
-      CancelStripeSubscription.new(@subscription.stripe_id).call
-      @subscription.destroy
+    result = CancelSubscription.call(subscription: @subscription)
+
+    if result.success?
+      redirect_to subscriptions_path, notice: 'Subscription was successfully canceled'
+    else
+      redirect_to result.subscription, alert: "#{result.message}"
     end
-
-    redirect_to subscriptions_path, notice: 'Subscription was successfully canceled'
-
-    rescue ActiveRecord::Rollback, Stripe::StripeError => e
-      flash.alert = e.message
   end
 
   private

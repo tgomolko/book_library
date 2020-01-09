@@ -9,7 +9,7 @@ class CreateCard
     PaymentMethod.transaction do
       @card = Stripe::PaymentMethods::CreateStripeCard.new(card_token, current_user).call
 
-      context.payment_method = PaymentMethod.create(build_payment_method_params)
+      context.payment_method = current_user.payment_methods.create(build_payment_method_params)
     end
 
     rescue ActiveRecord::Rollback, Stripe::StripeError => e
@@ -19,6 +19,6 @@ class CreateCard
   private
 
   def build_payment_method_params
-    card_params.merge(stripe_id: @card.id, user_id: current_user.id)
+    card_params.merge(stripe_id: @card.id)
   end
 end

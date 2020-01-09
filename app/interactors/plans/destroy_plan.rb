@@ -7,7 +7,7 @@ class DestroyPlan
 
   def call
     Plan.transaction do
-      Stripe::DestroyStripePlan.new(plan.stripe_id).call
+      Stripe::Plans::DestroyStripePlan.new(plan.stripe_id).call
       plan.destroy
     end
 

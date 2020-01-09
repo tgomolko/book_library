@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CancelStripeSubscription
+class FcancelStripeSubscription
   attr_reader :subscription_stripe_id
 
   def initialize(subscription_stripe_id)

@@ -1,4 +1,4 @@
-class CreateStripeSubscription
+class ScreateStripeSubscription
   attr_reader :subscription, :plan_stripe_id, :current_user, :stripe_token
 
   def initialize(subscription, plan_stripe_id, current_user, stripe_token)

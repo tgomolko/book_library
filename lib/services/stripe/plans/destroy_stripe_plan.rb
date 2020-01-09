@@ -1,15 +1,17 @@
 # frozen_string_literal: true
 
 module Stripe
-  class DestroyStripePlan
-    attr_reader :plan_stripe_id
+  module Plans
+    class DestroyStripePlan
+      attr_reader :plan_stripe_id
 
-    def initialize(plan_stripe_id)
-      @plan_stripe_id = plan_stripe_id
-    end
+      def initialize(plan_stripe_id)
+        @plan_stripe_id = plan_stripe_id
+      end
 
-    def call
-      Stripe::Plan.retrieve(plan_stripe_id).delete
+      def call
+        Stripe::Plan.retrieve(plan_stripe_id).delete
+      end
     end
   end
 end

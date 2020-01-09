@@ -7,7 +7,7 @@ class DestroyProduct
 
   def call
     Product.transaction do
-      Stripe::DestroyStripeProduct.new(product.stripe_id).call
+      Stripe::Products::DestroyStripeProduct.new(product.stripe_id).call
       product.destroy
     end
 
