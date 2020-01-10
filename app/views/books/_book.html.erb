@@ -17,10 +17,7 @@
       </div>
 
       <div class="content">
-        <% if  user_signed_in? && current_user.admin? %>
-          <%= link_to 'Edit', edit_book_path(book), class:"button is-small is-rounded" %>
-          <%= link_to 'Delete', book, method: :delete, data: { confirm: "Are you sure? "}, class:"button is-small is-rounded" %>
-        <% end %>
+        <%= render "books/book/actions", book: book %>
       </div>
 
     </div>

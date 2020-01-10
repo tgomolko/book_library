@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :books
-  get 'home/index'
+  get 'home', to: "home#index"
   root 'books#index'
 
   devise_for :users, controllers: { registrations: 'registrations' }
@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   resources :products
   resources :plans
-  resources :pricing, only: :index
+  get  'pricing', to: "pricing#index"
   resources :subscriptions
 
   get '/card/new' => "payment_methods#new_card", as: :add_payment_method

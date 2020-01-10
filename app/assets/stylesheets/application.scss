@@ -50,7 +50,6 @@
   font-size: 14px;
 }
 
-
 .book-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -59,4 +58,48 @@
 
 .fa.fa-download{
   font-size: 30px;
+}
+
+.active-subs{
+  text-align: center;
+  border: 1px solid #7a7a7a;
+  border-radius: 4px;
+  margin: 4px;
+  padding: 15px;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
+}
+
+.image-logo{
+  width: 200px;
+}
+
+.custom-btn{
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  height: 40px;
+  background: rgb(0, 102, 240);
+  background-color: rgb(0, 102, 240);
+  border-radius: 22px 22px 22px 22px;
+  margin-top: 5px;
+  color: rgb(255, 255, 255);
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.product-price{
+  text-align: left;
+color:
+rgb(0, 0, 0);
+font-size: 28px;
+font-weight: 500;
+}
+
+.product-name{
+  text-align: left;
+color:
+rgb(0, 0, 0);
+font-size: 17px;
+font-weight: 500;
+opacity: 0.7;
 }

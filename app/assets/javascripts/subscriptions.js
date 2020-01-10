@@ -93,6 +93,11 @@ document.addEventListener("turbolinks:load", function() {
     html.classList.remove('is-clipped');
   });
 
+});
 
 
+$(document).ready (function () {
+   $(document).on("click", ".dropdown", function(){
+    $(this).toggleClass("is-active");
+  });
 });

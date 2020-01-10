@@ -15,4 +15,8 @@ class User < ApplicationRecord
   def has_library_access?
     subscriptions.any?
   end
+
+  def active_subcription
+    subscriptions.last
+  end
 end

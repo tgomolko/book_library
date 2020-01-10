@@ -1,0 +1,5 @@
+<% if current_user.has_library_access? && @book.document_file_name %>
+  <%= link_to @book.document.url, { download: @book.document_file_name } do %>
+    <span class="is-pulled-right"><i class="fa fa-download" aria-hidden="true"></i></span>
+  <% end %>
+<% end %>

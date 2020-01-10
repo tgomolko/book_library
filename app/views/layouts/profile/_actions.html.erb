@@ -1,0 +1,54 @@
+<div class="dropdown is-right">
+
+  <div class="dropdown-trigger">
+    <button class="button is-primary" aria-haspopup="true" aria-controls="dropdown-menu">
+      <span>Profile</span>
+      <span class="icon is-small">
+        <i class="fa fa-angle-down" aria-hidden="true"></i>
+      </span>
+    </button>
+  </div>
+
+  <div class="dropdown-menu" id="dropdown-menu" role="menu">
+    <div class="dropdown-content">
+      <p class="dropdown-item">
+        signed in as <strong><%= current_user.name %></strong>
+      </p>
+
+      <hr class="dropdown-divider">
+
+      <%= link_to "Admin Dashboard", admin_path, class:"dropdown-item" if current_user.admin? %>
+
+      <strong>
+        <%= link_to "Dashboard", dashboard_path, class: "dropdown-item" %>
+      </strong>
+
+      <hr class="dropdown-divider">
+
+      <%= link_to "Change profile", edit_user_registration_path, class: "dropdown-item" %>
+
+      <%= link_to "Subcriptions", subscriptions_path, class: "dropdown-item"%>
+
+      <hr class="dropdown-divider">
+
+       <% if current_user.has_library_access? %>
+        <p class="dropdown-item">
+           <strong>active subcription</strong>
+        </p>
+
+        <%= link_to subscription_path(current_user.active_subcription) do %>
+          <p class="active-subs">
+            <%= current_user.active_subcription.plan.nickname %>
+          </p>
+        <% end %>
+
+      <% else %>
+        <%= link_to "Subscripe", pricing_path, class: "button is-success is-outlined is-fullwidth is-rounded"%>
+      <% end %>
+
+      <hr class="dropdown-divider">
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item"%>
+    </div>
+  </div>
+
+</div>
