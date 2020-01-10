@@ -25,7 +25,6 @@ class ProductsController < ApplicationController
 
   def update
     if @product.update(product_params)
-      #UpdateStripeProduct.new(@product).call
       redirect_to @product, notice: 'Product was successfully updated.'
     else
       render :edit
@@ -47,7 +46,6 @@ class ProductsController < ApplicationController
   def load_product
     @product = Product.find(params[:id])
   end
-
 
   def product_params
     params.require(:product).permit(:name, :product_type, :stripe_id)

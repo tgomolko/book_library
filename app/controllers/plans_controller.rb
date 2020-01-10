@@ -24,10 +24,7 @@ class PlansController < ApplicationController
   end
 
   def update
-    #ActiveRecord::Base.transaction do
-      @plan.update(plan_params)
-      #UpdateStripePlan.new(@plan.stripe_id, plan_params).call
-    #end
+    @plan.update(plan_params)
 
     redirect_to @plan, notice: 'Plan was successfully updated.'
 

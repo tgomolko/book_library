@@ -3,14 +3,15 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all
+    @plans = Plan.all.order(:amount)
   end
 
   def new
-    @book = current_user.books.build
+    @book = Book.new
   end
 
   def create
-    @book = current_user.books.build(book_params)
+    @book = Book.new(book_params)
 
     if @book.save
       redirect_to @book, notice: 'Book was successfully created.'
@@ -39,6 +40,6 @@ class BooksController < ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:title, :description, :author, :user_id, :price, :image, :document)
+    params.require(:book).permit(:title, :description, :author, :price, :image, :document)
   end
 end

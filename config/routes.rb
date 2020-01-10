@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :products
   resources :plans
+  resources :charges, only: [:new, :create]
   get  'pricing', to: "pricing#index"
   resources :subscriptions
 

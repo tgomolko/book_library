@@ -53,7 +53,6 @@ document.addEventListener("turbolinks:load", function() {
     }
   });
 
-
   const stripeTokenHandler = (token) => {
     const form = document.getElementById('payment-form');
     const hiddenInput = document.createElement('input');
@@ -77,7 +76,6 @@ document.addEventListener("turbolinks:load", function() {
     form.appendChild(hiddenInput);
   }
 
-
   var modal = document.querySelector('.modal');  // assuming you have only 1
   var html = document.querySelector('html');
 
@@ -95,9 +93,9 @@ document.addEventListener("turbolinks:load", function() {
 
 });
 
-
 $(document).ready (function () {
    $(document).on("click", ".dropdown", function(){
+
     $(this).toggleClass("is-active");
   });
 });

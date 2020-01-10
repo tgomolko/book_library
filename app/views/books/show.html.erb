@@ -5,14 +5,33 @@
       <%= image_tag @book.image.thumb.url if @book.image.url %>
 
       <div class="columns">
-        <div class="column">
-          <div class="product-price">$ <%= @book.price %></div>
+       <% if user_signed_in? && (@book.bought?(current_user) || current_user.has_library_access?)%>
+          <div class="column">
+            <%= render "books/book/attachment" %>
+          </div>
         </div>
-        <div class="column">
-          <%= link_to "Pay now", "#", class: "button custom-btn"  %>
+        <% else %>
+
+          <div class="column">
+            <div class="product-price">$ <%= @book.price %></div>
+          </div>
+          <div class="column">
+            <%= link_to "Pay now", new_charge_path(book_id: @book), class: "button custom-btn"  %>
+          </div>
+      </div>
+        <div class="columns">
+          <div class="column">
+            <%= link_to "Read by subscription", pricing_path, class: "button is-fullwidth custom-btn"  %>
+          </div>
+        </div>
+
+      <% end %>
+
+      <div class="columns">
+        <div class="column ">
+          <%= render "books/book/actions", book: @book %>
         </div>
       </div>
-
     </div>
 
     <div class="column is-4">
@@ -22,19 +41,9 @@
       <p><strong>Author:</strong></p>
         <%= @book.author %>
       <p>
-        <%= render "books/book/attachment" if user_signed_in? %>
       </p>
     </div>
   </div>
 
-  <div class="columns is-centered">
-
-    <div class="column is-2">
-      <div class="controls pt2">
-        <%= render "books/book/actions", book: @book %>
-      </div>
-    </div>
-
-  </div>
-
 </div>
+

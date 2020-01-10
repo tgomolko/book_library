@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_31_084244) do
+ActiveRecord::Schema.define(version: 2020_01_10_120832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 2019_12_31_084244) do
     t.string "title"
     t.text "description"
     t.string "author"
-    t.bigint "user_id"
     t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -28,7 +27,17 @@ ActiveRecord::Schema.define(version: 2019_12_31_084244) do
     t.string "document_content_type"
     t.bigint "document_file_size"
     t.datetime "document_updated_at"
-    t.index ["user_id"], name: "index_books_on_user_id"
+  end
+
+  create_table "charges", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "book_id"
+    t.integer "status", default: 0
+    t.string "stripe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_charges_on_book_id"
+    t.index ["user_id"], name: "index_charges_on_user_id"
   end
 
   create_table "payment_methods", force: :cascade do |t|
@@ -89,7 +98,8 @@ ActiveRecord::Schema.define(version: 2019_12_31_084244) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "books", "users"
+  add_foreign_key "charges", "books"
+  add_foreign_key "charges", "users"
   add_foreign_key "payment_methods", "users"
   add_foreign_key "plans", "products"
   add_foreign_key "subscriptions", "products"
