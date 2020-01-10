@@ -1,4 +1,5 @@
 class ChargesController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_book, only: [:new, :create]
 
   def create

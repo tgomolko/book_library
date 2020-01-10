@@ -12,10 +12,15 @@ module Stripe
 
       def call
         Stripe::Charge.create({
-          amount: amount,
+          amount: stripe_amount,
           currency: 'usd',
-          source:  source,
+          source:  source
         })
+      end
+      private
+
+      def stripe_amount
+        amount * 100
       end
     end
   end

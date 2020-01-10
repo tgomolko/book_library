@@ -4,7 +4,7 @@
       <h1 class="title is-3">Payments</h1>
       <hr />
       <p>Chosen book: <strong><%= @book.title %></strong>
-      <p> Total to pay: <strong><%= @book.price / 100 %> $ </strong></p>
+      <p> Total to pay: <strong><%= @book.price %> $ </strong></p>
       <hr/>
       <%= form_tag charges_path, id: "payment-form" do |form| %>
 
@@ -20,8 +20,7 @@
 
           <%= hidden_field_tag :book_id, @book.id %>
         </br>
-          <button class="button is-fullwidth is-link">Pay <%= @book.price / 100 %> $ </button>
-
+          <button class="button is-fullwidth is-link">Pay <%= @book.price %> $ </button>
       <% end %>
     </div>
   </div>

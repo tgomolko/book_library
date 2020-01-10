@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'admin', to: 'admin#dashboard'
 
   get 'dashboard', to:'user_dashboard#dashboard'
+  get 'dashboard/purchases', to: "user_dashboard#purchases"
 
   resources :products
   resources :plans
