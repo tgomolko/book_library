@@ -24,13 +24,11 @@ class PlansController < ApplicationController
   end
 
   def update
-    @plan.update(plan_params)
-
-    redirect_to @plan, notice: 'Plan was successfully updated.'
-
-    rescue ActiveRecord::Rollback, Stripe::StripeError, Exception => e
-      flash.alert = e.message
-      render :new
+    if @plan.update(plan_params)
+      redirect_to @plan, notice: 'Plan was successfully updated.'
+    else
+      render :edit
+    end
   end
 
   def destroy
