@@ -17,6 +17,7 @@ module Stripe
           source:  source
         })
       end
+
       private
 
       def stripe_amount
