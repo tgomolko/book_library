@@ -78,12 +78,16 @@ document.addEventListener("turbolinks:load", function() {
 });
 
 $(document).ready (function () {
-   $(document).on("click", ".dropdown", function(){
-
+   $(document).on("mouseenter", ".dropdown", function(){
     $(this).toggleClass("is-active");
   });
 });
 
+$(document).ready (function () {
+   $(document).on("mouseleave", ".dropdown", function(){
+    $(this).toggleClass("is-active");
+  });
+});
 
 document.addEventListener("turbolinks:load", function() {
 
@@ -122,4 +126,11 @@ document.addEventListener("turbolinks:load", function() {
     this.addEventListener('change', handleFileSelect, false);
   }
 
+});
+
+$(document).ready(function() {
+  $(".navbar-burger").click(function() {
+    $(".navbar-burger").toggleClass("is-active");
+    $(".navbar-menu").toggleClass("is-active");
+  });
 });

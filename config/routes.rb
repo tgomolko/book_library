@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
 
   get 'admin', to: 'admin#dashboard'
+  get 'admin/books', to: 'admin#books'
 
   get 'dashboard', to:'user_dashboard#dashboard'
   get 'dashboard/purchases', to: "user_dashboard#purchases"

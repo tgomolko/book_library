@@ -1,5 +1,7 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :check_book_pilicy, except: [:index, :show]
+  before_action :load_book, only: [:show, :edit, :update, :destroy]
 
   def index
     @books = Book.all
@@ -35,11 +37,15 @@ class BooksController < ApplicationController
 
   private
 
-  def set_book
+  def load_book
     @book = Book.find(params[:id])
   end
 
   def book_params
     params.require(:book).permit(:title, :description, :author, :price, :image, :document)
+  end
+
+  def check_book_pilicy
+    redirect_to root_path, alert: "Access disable only for admins" unless current_user.admin?
   end
 end

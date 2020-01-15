@@ -10,7 +10,8 @@ module Stripe
       end
 
       def call
-        Stripe::Product.create(name: product_params[:name], type: product_params[:product_type])
+        #binding.pry
+       # Stripe::Product.create(name: product_params[:name], type: product_params[:product_type])
       end
     end
   end

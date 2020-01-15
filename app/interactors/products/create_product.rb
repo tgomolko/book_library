@@ -19,6 +19,7 @@ class CreateProduct
   private
 
   def build_product_params
+    binding.pry
     product_params.merge(stripe_id: @stripe_product.id)
   end
 end

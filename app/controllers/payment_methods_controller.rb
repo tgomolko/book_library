@@ -2,10 +2,6 @@ class PaymentMethodsController  < ApplicationController
   before_action :authenticate_user!
   before_action :load_payment_method, only: [:show, :destroy]
 
-  def new_card
-    #redirect_to root_path, notice: "You have already had payment method" and return unless current_user.payment_methods.any?
-  end
-
   def cards
     @cards = current_user.payment_methods
   end

@@ -89,17 +89,25 @@
 
 .product-price{
   text-align: left;
-color:
-rgb(0, 0, 0);
-font-size: 28px;
-font-weight: 500;
+  color:
+  rgb(0, 0, 0);
+  font-size: 28px;
+  font-weight: 500;
 }
 
 .product-name{
   text-align: left;
-color:
-rgb(0, 0, 0);
-font-size: 17px;
-font-weight: 500;
-opacity: 0.7;
+  color:
+  rgb(0, 0, 0);
+  font-size: 17px;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+.book:hover {
+  filter: brightness(110%);
+  transform: scale(1.03);
+  transition-property: all;
+  transition-duration: .9s;
+  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 }
