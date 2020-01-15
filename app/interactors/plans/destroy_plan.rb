@@ -11,7 +11,7 @@ class DestroyPlan
       plan.destroy
     end
 
-    rescue ActiveRecord::Rollback, Stripe::StripeError => e
+    rescue ActiveRecord::ActiveRecordError, Stripe::StripeError => e
       context.fail!(message: e.message)
   end
 

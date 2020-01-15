@@ -38,6 +38,7 @@ gem 'mini_magick', '>= 4.9.5'
 gem "paperclip", '~> 6.1'
 gem 'paperclip-ghostscript', '~> 0.1.0'
 gem 'interactor', '~> 3.1'
+gem 'friendly_id', '~> 5.2.4'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

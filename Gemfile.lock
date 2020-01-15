@@ -110,6 +110,8 @@ GEM
       railties (>= 4.2.0)
     ffi (1.11.3)
     formatador (0.2.5)
+    friendly_id (5.2.5)
+      activerecord (>= 4.0.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     guard (2.16.1)
@@ -316,6 +318,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise (~> 4.7)
   factory_bot_rails (~> 5.1)
+  friendly_id (~> 5.2.4)
   guard
   guard-livereload
   interactor (~> 3.1)
