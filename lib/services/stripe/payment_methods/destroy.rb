@@ -2,7 +2,7 @@
 
 module Stripe
   module PaymentMethods
-    class DestroyStripeCard
+    class Destroy
       attr_reader :card_stripe_id, :customer_id
 
       def initialize(card_stripe_id, customer_id)

@@ -1,4 +1,4 @@
-require_dependency("create_stripe_charge")
+require_dependency("create")
 
 class CreateCharge
   include Interactor
@@ -7,7 +7,7 @@ class CreateCharge
 
   def call
     Charge.transaction do
-     @charge = Stripe::Charges::CreateStripeCharge.new(book.price.to_i, stripe_token).call
+     @charge = Stripe::Charges::Create.new(book.price.to_i, stripe_token).call
 
       context.charge = current_user.charges.create(build_charge_params)
       context.charge.paid!

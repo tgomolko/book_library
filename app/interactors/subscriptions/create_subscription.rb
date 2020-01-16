@@ -1,4 +1,4 @@
-require_dependency("create_stripe_subscription")
+require_dependency("create")
 
 class CreateSubscription
   include Interactor
@@ -7,7 +7,7 @@ class CreateSubscription
 
   def call
     Subscription.transaction do
-      @stripe_subscription = Stripe::Subscriptions::CreateStripeSubscription.new(current_user, plan_stripe_id, stripe_token).call
+      @stripe_subscription = Stripe::Subscriptions::Create.new(current_user, plan_stripe_id, stripe_token).call
 
       context.subscription = current_user.subscriptions.create!(build_subscriptions_params)
     end
@@ -20,7 +20,7 @@ class CreateSubscription
   private
 
   def rollback
-    Stripe::Subscriptions::CancelStripeSubscription.new(@stripe_subscription.id).call if @stripe_subscription.id
+    Stripe::Subscriptions::Cancel.new(@stripe_subscription.id).call if @stripe_subscription.id
   end
 
   def build_subscriptions_params

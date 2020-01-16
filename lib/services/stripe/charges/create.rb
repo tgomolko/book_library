@@ -2,7 +2,7 @@
 
 module Stripe
   module Charges
-    class CreateStripeCharge
+    class Create
       attr_reader :amount, :source
 
       def initialize(amount, source)

@@ -1,4 +1,4 @@
-require_dependency("create_stripe_card")
+require_dependency("create")
 
 class CreateCard
   include Interactor
@@ -7,7 +7,7 @@ class CreateCard
 
   def call
     PaymentMethod.transaction do
-      @card = Stripe::PaymentMethods::CreateStripeCard.new(card_token, current_user).call
+      @card = Stripe::PaymentMethods::Create.new(card_token, current_user).call
 
       context.payment_method = current_user.payment_methods.create!(build_payment_method_params)
     end
@@ -20,7 +20,7 @@ class CreateCard
   private
 
   def rollback
-    Stripe::PaymentMethods::DestroyStripeCard.new(@card.id, current_user.id).call if @card.id
+    Stripe::PaymentMethods::Destroy.new(@card.id, current_user.id).call if @card.id
   end
 
   def build_payment_method_params

@@ -2,7 +2,7 @@
 
 module Stripe
   module Customers
-    class CreateStripeCustomer
+    class Create
       attr_reader :current_user
 
       def initialize(current_user)

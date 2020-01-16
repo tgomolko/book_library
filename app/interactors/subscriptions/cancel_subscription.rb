@@ -1,4 +1,4 @@
-require_dependency("cancel_stripe_subscription")
+require_dependency("cancel")
 
 class CancelSubscription
   include Interactor
@@ -7,7 +7,8 @@ class CancelSubscription
 
   def call
     Subscription.transaction do
-      Stripe::Subscriptions::CancelStripeSubscription.new(subscription.stripe_id).call
+      Stripe::Subscriptions::Cancel.new(subscription.stripe_id).call
+
       subscription.destroy
     end
 

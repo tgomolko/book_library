@@ -1,4 +1,4 @@
-require_dependency("destroy_stripe_card")
+require_dependency("destroy")
 
 class DestroyCard
   include Interactor
@@ -7,7 +7,8 @@ class DestroyCard
 
   def call
    PaymentMethod.transaction do
-      Stripe::PaymentMethods::DestroyStripeCard.new(payment_method.stripe_id, customer_id).call
+      Stripe::PaymentMethods::Destroy.new(payment_method.stripe_id, customer_id).call
+
       payment_method.destroy
     end
 

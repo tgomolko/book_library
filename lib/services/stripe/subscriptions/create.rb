@@ -2,7 +2,7 @@
 
 module Stripe
   module Subscriptions
-    class CreateStripeSubscription
+    class Create
       attr_reader :current_user, :plan_stripe_id, :card_token
 
       def initialize(current_user, plan_stripe_id, card_token)

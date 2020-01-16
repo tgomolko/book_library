@@ -2,7 +2,7 @@
 
 module Stripe
   module Plans
-    class DestroyStripePlan
+    class Destroy
       attr_reader :plan_stripe_id
 
       def initialize(plan_stripe_id)

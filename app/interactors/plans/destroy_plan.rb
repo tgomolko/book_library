@@ -1,4 +1,4 @@
-require_dependency("destroy_stripe_plan")
+require_dependency("destroy")
 
 class DestroyPlan
   include Interactor
@@ -7,12 +7,12 @@ class DestroyPlan
 
   def call
     Plan.transaction do
-      Stripe::Plans::DestroyStripePlan.new(plan.stripe_id).call
+      Stripe::Plans::Destroy.new(plan.stripe_id).call
+
       plan.destroy
     end
 
-    rescue ActiveRecord::ActiveRecordError, Stripe::StripeError => e
+    rescue ActiveRecord::Rollback, Stripe::StripeError => e
       context.fail!(message: e.message)
   end
-
 end

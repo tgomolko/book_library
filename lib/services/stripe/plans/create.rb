@@ -2,7 +2,7 @@
 
 module Stripe
   module Plans
-    class CreateStripePlan
+    class Create
       attr_reader :plan_params, :product_stripe_id
 
       def initialize(plan_params, product_stripe_id)

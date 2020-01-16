@@ -2,7 +2,7 @@
 
 module Stripe
   module Subscriptions
-    class CancelStripeSubscription
+    class Cancel
       attr_reader :subscription_stripe_id
 
       def initialize(subscription_stripe_id)
