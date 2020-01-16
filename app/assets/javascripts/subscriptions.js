@@ -134,3 +134,7 @@ $(document).ready(function() {
     $(".navbar-menu").toggleClass("is-active");
   });
 });
+
+$.notify.defaults(
+  { globalPosition:"top right" }
+);

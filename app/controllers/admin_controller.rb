@@ -9,6 +9,6 @@ class AdminController < ApplicationController
   private
 
   def ensure_admin_dashboard_access
-    redirect_to root_path, alert: "Access disable, only for admins" unless current_user.admin?
+    redirect_to root_path, alert: t(:access_disable) unless current_user.admin?
   end
 end

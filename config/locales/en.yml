@@ -30,4 +30,8 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  books:
+    book_created: "Book was successfully created"
+    book_destoyed: "Book was successfully destoyed"
+  admin:
+    access_disable: "Access disable, only for admins"
