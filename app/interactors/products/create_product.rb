@@ -1,4 +1,4 @@
-require_dependency("create_stripe_product")
+require_dependency("create")
 
 class CreateProduct
   include Interactor
@@ -7,7 +7,7 @@ class CreateProduct
 
   def call
     Product.transaction do
-      @stripe_product = Stripe::Products::CreateStripeProduct.new(product_params).call
+      @stripe_product = Stripe::Products::Create.new(product_params).call
 
       context.product = Product.create!(build_product_params)
     end
@@ -20,10 +20,11 @@ class CreateProduct
   private
 
   def rollback
-    Stripe::Products::DestroyStripeProduct.new(@stripe_product.id).call if @stripe_product.id
+    Stripe::Products::Destroy.new(@stripe_product.id).call if @stripe_product.id
   end
 
   def build_product_params
     product_params.merge(stripe_id: @stripe_product.id)
   end
 end
+

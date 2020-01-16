@@ -2,7 +2,7 @@
 
 module Stripe
   module Products
-    class DestroyStripeProduct
+    class Destroy
       attr_reader :product_stripe_id
 
       def initialize(product_stripe_id)

@@ -1,4 +1,4 @@
-require_dependency("destroy_stripe_product")
+require_dependency("destroy")
 
 class DestroyProduct
   include Interactor
@@ -7,7 +7,8 @@ class DestroyProduct
 
   def call
     Product.transaction do
-      Stripe::Products::DestroyStripeProduct.new(product.stripe_id).call
+      Stripe::Products::Destroy.new(product.stripe_id).call
+
       product.destroy
     end
 

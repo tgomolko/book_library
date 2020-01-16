@@ -2,7 +2,7 @@
 
 module Stripe
   module Products
-    class CreateStripeProduct
+    class Create
       attr_reader :product_params
 
       def initialize(product_params)
