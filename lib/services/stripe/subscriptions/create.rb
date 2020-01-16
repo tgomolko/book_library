@@ -12,7 +12,7 @@ module Stripe
       end
 
       def call
-        Stripe::PaymentMethods::CreateStripeCard.new(card_token, current_user).call unless current_user.stripe_id
+        Stripe::PaymentMethods::Create.new(card_token, current_user).call unless current_user.stripe_id
 
         Stripe::Subscription.create({ customer: current_user.stripe_id, items: [{plan: plan_stripe_id}] })
       end

@@ -11,9 +11,17 @@ module Stripe
 
       def call
         User.transaction do
-          customer = Stripe::Customer.create(email: current_user.email)
-          current_user.update(stripe_id: customer.id)
+          @customer = Stripe::Customer.create(email: current_user.email)
+          current_user.update(stripe_id: @customer.id)
         end
+
+        rescue ActiveRecord::ActiveRecordError, Stripe::StripeError  => error
+          rollback if error.kind_of?(ActiveRecord::ActiveRecordError)
+          context.fail!(message: error.message)
+      end
+
+      def rollback
+        Stripe::Customer.reretrieve(@customer.id).delete
       end
     end
   end
