@@ -1,4 +1,6 @@
 class PlansController < ApplicationController
+  before_action :authenticate_user!
+  before_action :check_plan_policy
   before_action :load_plan, only: [:show, :edit, :update, :destroy]
   before_action :load_product, only: :create
 
@@ -53,5 +55,9 @@ class PlansController < ApplicationController
 
   def load_product
     @product = Product.find(params[:plan][:product_id])
+  end
+
+  def check_plan_policy
+    redirect_to root_path, alert: "Access disable, only for admins" unless current_user.admin?
   end
 end

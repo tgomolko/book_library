@@ -12,9 +12,9 @@ class CreateSubscription
       context.subscription = current_user.subscriptions.create!(build_subscriptions_params)
     end
 
-    rescue ActiveRecord::ActiveRecordError, Stripe::StripeError => e
-      rollback
-      context.fail!(message: e.message)
+    rescue ActiveRecord::ActiveRecordError, Stripe::StripeError => error
+      rollback if error.kind_of?(ActiveRecord::ActiveRecordError)
+      context.fail!(message: error.message)
   end
 
   private

@@ -77,18 +77,6 @@ document.addEventListener("turbolinks:load", function() {
   }
 });
 
-$(document).ready (function () {
-   $(document).on("mouseenter", ".dropdown", function(){
-    $(this).toggleClass("is-active");
-  });
-});
-
-$(document).ready (function () {
-   $(document).on("mouseleave", ".dropdown", function(){
-    $(this).toggleClass("is-active");
-  });
-});
-
 document.addEventListener("turbolinks:load", function() {
 
   var bookImage = document.querySelector('.book-image');
@@ -128,13 +116,7 @@ document.addEventListener("turbolinks:load", function() {
 
 });
 
-$(document).ready(function() {
-  $(".navbar-burger").click(function() {
-    $(".navbar-burger").toggleClass("is-active");
-    $(".navbar-menu").toggleClass("is-active");
-  });
-});
-
 $.notify.defaults(
   { globalPosition:"top right" }
 );
+
