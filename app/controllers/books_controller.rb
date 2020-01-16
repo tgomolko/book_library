@@ -4,7 +4,7 @@ class BooksController < ApplicationController
   before_action :load_book, only: [:show, :edit, :update, :destroy]
 
   def index
-    @books = Book.all
+    @books = Book.all.order("created_at ASC")
     @plans = Plan.all.order(:amount)
   end
 
