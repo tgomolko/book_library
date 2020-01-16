@@ -12,9 +12,9 @@ class CreatePlan
       context.plan = Plan.create!(build_plan_params)
     end
 
-    rescue ActiveRecord::ActiveRecordError, Stripe::StripeError  => e
-      rollback if e.kind_of?(ActiveRecord::ActiveRecordError)
-      context.fail!(message: e.message)
+    rescue ActiveRecord::ActiveRecordError, Stripe::StripeError  => error
+      rollback if error.kind_of?(ActiveRecord::ActiveRecordError)
+      context.fail!(message: error.message)
   end
 
   private

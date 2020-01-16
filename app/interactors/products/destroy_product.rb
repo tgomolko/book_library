@@ -12,8 +12,8 @@ class DestroyProduct
       product.destroy
     end
 
-    rescue ActiveRecord::Rollback, Stripe::StripeError => e
-      context.fail!(message: e.message)
+    rescue ActiveRecord::Rollback, Stripe::StripeError => error
+      context.fail!(message: error.message)
   end
 
 end

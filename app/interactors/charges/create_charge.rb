@@ -13,8 +13,8 @@ class CreateCharge
       context.charge.paid!
     end
 
-    rescue ActiveRecord::Rollback, Stripe::StripeError => e
-      context.fail!(message: e.message)
+    rescue ActiveRecord::Rollback, Stripe::StripeError => error
+      context.fail!(message: error.message)
   end
 
   def build_charge_params
