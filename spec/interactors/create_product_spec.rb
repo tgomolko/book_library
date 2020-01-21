@@ -1,28 +1,54 @@
 require 'rails_helper'
 
 RSpec.describe CreateProduct do
-  subject(:context) { CreateProduct.call(params) }
+  subject(:context) { CreateProduct.call(product_params: product_params) }
 
-  let(:params) { FactoryBot.attributes_for(:product) }
-  let(:product) { FactoryBot.create(:product) }
-  let(:stipe_plan) { instance_double(Stripe::Product) }
-  let(:product) { instance_double(Stripe::Products::Create) }
-  let(:stubbed_product_params) { params.merge(stripe_id: "id") }
-
-  before do
-    allow(Product).to receive(:create).with(stubbed_product_params).and_return(product)
-    allow(Stripe::Products::Create).to receive(:new).and_return product
-    allow(product).to receive(:call).and_return stipe_plan
-    allow_any_instance_of(CreateProduct).to receive(:build_product_params).and_return stubbed_product_params
-  end
+  let(:product_params) { attributes_for(:product) }
+  let(:stipe_plan) { double(:stipe_plan, id: "plan_GQ5df6yO2ZK0Cm") }
 
   describe ".call" do
-    it "succeeds" do
-      expect(context).to be_a_success
+    before do
+      allow(Stripe::Products::Create).to receive_message_chain(:new, :call) { stipe_plan }
     end
 
-    # it "provides the product" do
-    #   expect(context.product).to eq(product)
-    # end
+    context "when given correct params" do
+      it "succeeds" do
+        expect(context).to be_a_success
+      end
+
+      it "provides the product" do
+        expect(context.product).to eq(Product.last)
+      end
+    end
+
+    context "when stripe service fails" do
+      before do
+        allow(Stripe::Products::Create).to receive_message_chain(:new, :call).and_raise(Stripe::StripeError, "error message")
+      end
+
+      it "fails" do
+        expect(context).to be_a_failure
+      end
+
+      it "provides a failure message" do
+        expect(context.message).to be_present
+      end
+    end
+
+    context "when active record fails" do
+      before do
+        allow(Product).to receive(:create!).and_raise(ActiveRecord::ActiveRecordError, "error message")
+        allow(Stripe::Products::Destroy).to receive_message_chain(:new, :call) { stipe_plan }
+      end
+
+      it "fails" do
+        expect(context).to be_a_failure
+      end
+
+      it "provides a failure message" do
+        expect(context.message).to be_present
+      end
+    end
+
   end
 end

@@ -6,11 +6,9 @@ class CreateProduct
   delegate :product_params, to: :context
 
   def call
-    Product.transaction do
-      @stripe_product = Stripe::Products::Create.new(product_params).call
+    @stripe_product = Stripe::Products::Create.new(product_params).call
 
-      context.product = Product.create!(build_product_params)
-    end
+    context.product = Product.create!(build_product_params)
 
     rescue ActiveRecord::ActiveRecordError, Stripe::StripeError => error
       rollback if error.kind_of?(ActiveRecord::ActiveRecordError)

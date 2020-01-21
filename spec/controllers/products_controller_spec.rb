@@ -1,123 +1,132 @@
 require 'rails_helper'
 
 RSpec.describe ProductsController do
+  let(:admin_user) { create(:admin_user) }
+  let(:user) { create(:user) }
+  let(:product) { create(:product) }
+  let(:product_params) { attributes_for(:product) }
 
   describe "#index" do
     context "as an authenticated user admin" do
       before do
-        @admin_user = FactoryBot.create(:admin_user)
+        sign_in admin_user
+        get :index
       end
 
       it "responds successfully" do
-        sign_in @admin_user
-        get :index
-        expect(response).to be_success
+        expect(response).to be_successful
       end
 
       it "returns a 200 response" do
-        sign_in @admin_user
-        get :index
         expect(response).to have_http_status "200"
       end
     end
 
     context "as an authenticated user user" do
       before do
-        @user = FactoryBot.create(:user)
+        sign_in user
+        get :index
       end
 
       it "redirects to the root path" do
-        sign_in @user
-        get :index
         expect(response).to redirect_to root_path
       end
 
       it "returns a 302 response" do
-        get :index
         expect(response).to have_http_status "302"
       end
     end
 
     context "as an unauthenticated user" do
       before do
-        @user = FactoryBot.create(:user)
+        get :index
       end
 
       it "returns a 302 response" do
-        get :index
         expect(response).to have_http_status "302"
       end
 
       it "redirects to the sign-in page" do
-        get :index
         expect(response).to redirect_to new_user_session_path
       end
     end
   end
 
   describe "#create" do
-    context "as an authenticated user admin" do
-      before do
-        # @admin_user = FactoryBot.create(:admin_user)
-        # #product = FactoryBot.create(:product)
-        # result = instance_double(Interactor::Context)
-        # pr = class_double(Product)
-        # binding.pry
-        # allow(result).to receive(:success?).and_return true
-        # allow(CreateProduct).to receive(:call).and_return result
-        # allow(result).to receive(:product).and_return pr
+    before do
+      expect(CreateProduct).to receive(:call).and_return(context)
+      sign_in admin_user
+    end
 
-      end
+    context "when successfull" do
+      let(:context) { double(:context, success?: true, product: product, message: "hii") }
 
       it "redirects to product path" do
-        # sign_in @admin_user
+        post :create, params: { product: product_params }
+        expect(response).to redirect_to product_path(context.product)
+      end
 
-        # post :create, params: { product: { name: "dsds", product_type: "dsre" } }
-        # expect(CreateProduct).to have_received(:call)
+      it "sets flash notice" do
+        expect {
+          post :create, params: { product: product_params }
+        }.to change {
+          flash[:notice]
+        }.from(nil).to("Product was successfully created")
       end
     end
 
-    describe "#show" do
-      context "as an authorized user admin" do
-        before do
-          @admin_user = FactoryBot.create(:admin_user)
-          @product = FactoryBot.create(:product)
-        end
+    context "when unsuccessful" do
+      let(:context) { double(:context, success?: false, message: "message") }
 
-        it "response successfully" do
-          sign_in @admin_user
-          get :show, params: { id: @product.id }
-          expect(response).to be_success
-        end
+      it "renders new template" do
+         post :create, params: { product: product_params }
+        expect(response).to render_template :new
       end
 
-      context "as an authorized user user" do
-        before do
-          @user = FactoryBot.create(:user)
-          @product = FactoryBot.create(:product)
-        end
+      it "sets flash notice" do
+        expect {
+          post :create, params: { product: product_params }
+        }.to change {
+          flash[:alert]
+        }.from(nil).to("message")
+      end
+    end
+  end
 
-        it "redirects to root path" do
-          sign_in @user
-          get :show, params: { id: @product.id }
-          expect(response).to redirect_to root_path
-        end
+  describe "#show" do
+    context "as an authorized user admin" do
+      before do
+        sign_in admin_user
+        get :show, params: { id: product.id }
       end
 
-      context "as an unauthorized user" do
-        before do
-          @product = FactoryBot.create(:product)
-        end
+      it "response successfully" do
+        expect(response).to be_successful
+      end
+    end
 
-        it "redirects to sing up path" do
-          get :show, params: { id: @product.id }
-          expect(response).to redirect_to new_user_session_path
-        end
+    context "as an authorized user user" do
+      before do
+        sign_in user
+        get :show, params: { id: product.id }
+      end
 
-        it "returns a 302 response" do
-          get :show, params: { id: @product.id }
-          expect(response).to have_http_status "302"
-        end
+      it "redirects to root path" do
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context "as an unauthorized user" do
+      before do
+        get :show, params: { id: product.id }
+      end
+
+      it "redirects to sing up path" do
+        expect(response).to redirect_to new_user_session_path
+      end
+
+      it "returns a 302 response" do
+        expect(response).to have_http_status "302"
       end
     end
   end

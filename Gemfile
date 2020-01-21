@@ -55,6 +55,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.9'
   gem 'factory_bot_rails', '~> 5.1'
   gem 'pry'
+  gem 'rails-controller-testing', '~> 1.0'
 end
 
 group :development do

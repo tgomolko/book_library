@@ -6,14 +6,11 @@ class DestroyProduct
   delegate :product, to: :context
 
   def call
-    Product.transaction do
-      Stripe::Products::Destroy.new(product.stripe_id).call
+    Stripe::Products::Destroy.new(product.stripe_id).call
 
-      product.destroy
-    end
+    product.destroy
 
     rescue ActiveRecord::Rollback, Stripe::StripeError => error
       context.fail!(message: error.message)
   end
-
 end
