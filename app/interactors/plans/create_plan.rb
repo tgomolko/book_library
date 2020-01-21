@@ -6,11 +6,9 @@ class CreatePlan
   delegate :plan_params, :product_stripe_id, to: :context
 
   def call
-    Plan.transaction do
-      @stripe_plan = Stripe::Plans::Create.new(plan_params, product_stripe_id).call
+    @stripe_plan = Stripe::Plans::Create.new(plan_params, product_stripe_id).call
 
-      context.plan = Plan.create!(build_plan_params)
-    end
+    context.plan = Plan.create!(build_plan_params)
 
     rescue ActiveRecord::ActiveRecordError, Stripe::StripeError  => error
       rollback if error.kind_of?(ActiveRecord::ActiveRecordError)

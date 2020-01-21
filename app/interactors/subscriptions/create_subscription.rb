@@ -6,11 +6,9 @@ class CreateSubscription
   delegate :subscription_params, :current_user, :stripe_token, :plan_stripe_id, to: :context
 
   def call
-    Subscription.transaction do
-      @stripe_subscription = Stripe::Subscriptions::Create.new(current_user, plan_stripe_id, stripe_token).call
+    @stripe_subscription = Stripe::Subscriptions::Create.new(current_user, plan_stripe_id, stripe_token).call
 
-      context.subscription = current_user.subscriptions.create!(build_subscriptions_params)
-    end
+    context.subscription = current_user.subscriptions.create!(build_subscriptions_params)
 
     rescue ActiveRecord::ActiveRecordError, Stripe::StripeError => error
       rollback if error.kind_of?(ActiveRecord::ActiveRecordError)

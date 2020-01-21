@@ -6,11 +6,9 @@ class CreateCard
   delegate :card_params, :current_user, :card_token, to: :context
 
   def call
-    PaymentMethod.transaction do
-      @card = Stripe::PaymentMethods::Create.new(card_token, current_user).call
+    @card = Stripe::PaymentMethods::Create.new(card_token, current_user).call
 
-      context.payment_method = current_user.payment_methods.create!(build_payment_method_params)
-    end
+    context.payment_method = current_user.payment_methods.create!(build_payment_method_params)
 
     rescue ActiveRecord::ActiveRecordError, Stripe::StripeError => error
       rollback if error.kind_of?(ActiveRecord::ActiveRecordError)
