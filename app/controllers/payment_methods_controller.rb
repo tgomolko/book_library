@@ -18,6 +18,21 @@ class PaymentMethodsController  < ApplicationController
     end
   end
 
+  def add_bank_account
+    result = AddBankAccount.call(bank_account_token: params[:token], current_user: current_user)
+
+    if result.success?
+      redirect_to bank_account_path(result.bank_account) , notice: "Bank Account added"
+    else
+      flash.now.alert = result.message
+      render :new_card
+    end
+  end
+
+  def bank_account
+    @bank_account = PaymentMethod.find(params[:id])
+  end
+
   def destroy
     result = DestroyCard.call(payment_method: @payment_method, customer_id: current_user.stripe_id)
 

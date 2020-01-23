@@ -115,3 +115,11 @@
 .notifyjs-corner {
   top: 70px !important;
 }
+
+.error.visible {
+  display: inline;
+}
+
+.error{
+  color: red;
+}

@@ -1,1 +1,59 @@
 <%= render "menu" %>
+
+<form action="/charge" method="post" id="payment-form">
+  <div class="form-row inline">
+    <div class="col">
+      <label for="name">
+        Name
+      </label>
+      <input id="name" name="name" placeholder="Jenny Rosen" required>
+    </div>
+    <div class="col">
+      <label for="email">
+        Email Address
+      </label>
+      <input id="email" name="email" type="email" placeholder="jenny.rosen@example.com" required>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <label for="iban-element">
+      IBAN
+    </label>
+    <div id="iban-element">
+      <!-- A Stripe Element will be inserted here. -->
+    </div>
+  </div>
+  <div id="bank-name"></div>
+
+  <button>Submit Payment</button>
+
+
+<div class="section">
+  <div class="columns is-centered">
+    <div class="column is-4">
+      <h1 class="title is-3">Add payment method</h1>
+
+      <hr/>
+
+      <%= form_tag create_payment_method_path, id: "payment-form" do |form| %>
+
+        <div class="field">
+          <label for="iban-element" class="label">Enter credit or debit card</label>
+
+          <div id="iban-element">
+            <!-- A Stripe element will be intserted here !-->
+          </div>
+
+          <div id="iban-errors" role="alert"></div>
+          <div id="bank-name"></div>
+
+
+        </br>
+          <button class="button  is-link">Submit</button>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>

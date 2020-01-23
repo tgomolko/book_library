@@ -22,5 +22,7 @@ Rails.application.routes.draw do
   get '/card/:id' => "payment_methods#show", as: :card
   delete '/card/:id' => "payment_methods#destroy", as: :remove_card
   get '/cards' => "payment_methods#cards", as: :cards
+  post "/bank_account" => "payment_methods#add_bank_account", as: :add_bank_account
+  get "/bank_account/:id" => "payment_methods#bank_account", as: :bank_account
 
 end

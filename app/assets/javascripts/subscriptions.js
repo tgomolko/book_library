@@ -120,3 +120,39 @@ $.notify.defaults(
   { globalPosition:"top right" }
 );
 
+document.addEventListener("turbolinks:load", function() {
+  var stripe = Stripe('pk_test_WinUnLY18E0n0McRfBTLcnEn');
+
+  function setOutcome(result) {
+    var errorElement = document.querySelector('.error');
+
+    if (result.token) {
+      var form = document.getElementById('account-form');
+      form.querySelector('input[name="token"]').setAttribute('value', result.token.id);
+      form.submit();
+    } else {
+      errorElement.textContent = result.error.message;
+      errorElement.addClass('visible');
+    }
+  }
+
+  form = document.getElementById('account-form');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+  var bankAccountParams = {
+    country: document.getElementById('country').value,
+    currency: document.getElementById('currency').value,
+    account_number: document.getElementById('account-number').value,
+    account_holder_name: document.getElementById('account-holder-name').value,
+    account_holder_type: document.getElementById('account-holder-type').value,
+  }
+  if (document.getElementById('routing-number').value != '') {
+    bankAccountParams['routing_number'] = document.getElementById('routing-number').value;
+  }
+
+  stripe.createToken('bank_account', bankAccountParams).then(setOutcome);
+
+  });
+});
