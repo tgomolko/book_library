@@ -2,9 +2,8 @@ require 'rails_helper'
 
 RSpec.describe CreatePlan do
   subject(:context) { CreatePlan.call(plan_params: plan_params) }
-  let(:product) { create(:product) }
 
-  let(:plan_params) { attributes_for(:plan, product_id: product.id ) }
+  let(:plan_params) { attributes_for(:plan, product_id: create(:product).id ) }
   let(:stripe_plan) { double(:stripe_plan, id: "plan_GQ5df6yO2ZK0Cm") }
 
   describe ".call" do
@@ -21,7 +20,6 @@ RSpec.describe CreatePlan do
         expect(context.plan).to eq(Plan.last)
       end
     end
-
 
     context "when stripe service fails" do
       before do
@@ -52,5 +50,4 @@ RSpec.describe CreatePlan do
       end
     end
   end
-
 end
