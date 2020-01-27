@@ -4,11 +4,11 @@ RSpec.describe CreateProduct do
   subject(:context) { CreateProduct.call(product_params: product_params) }
 
   let(:product_params) { attributes_for(:product) }
-  let(:stipe_plan) { double(:stipe_plan, id: "plan_GQ5df6yO2ZK0Cm") }
+  let(:stripe_product) { double(:stripe_product, id: "prod_GQ5df6yO2ZK0Cm") }
 
   describe ".call" do
     before do
-      allow(Stripe::Products::Create).to receive_message_chain(:new, :call) { stipe_plan }
+      allow(Stripe::Products::Create).to receive_message_chain(:new, :call) { stripe_product }
     end
 
     context "when given correct params" do
@@ -38,7 +38,7 @@ RSpec.describe CreateProduct do
     context "when active record fails" do
       before do
         allow(Product).to receive(:create!).and_raise(ActiveRecord::ActiveRecordError, "error message")
-        allow(Stripe::Products::Destroy).to receive_message_chain(:new, :call) { stipe_plan }
+        allow(Stripe::Products::Destroy).to receive_message_chain(:new, :call) { stripe_product }
       end
 
       it "fails" do

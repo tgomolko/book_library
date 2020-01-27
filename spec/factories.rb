@@ -1,4 +1,11 @@
 FactoryBot.define do
+  factory :plan do
+    nickname { "Standard" }
+    product_id { 1 }
+    currency { "usd" }
+    interval { "week" }
+  end
+
   factory :user do
     name { "Joe" }
     email { "joe@elearning.com" }

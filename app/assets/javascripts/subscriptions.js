@@ -129,6 +129,7 @@ document.addEventListener("turbolinks:load", function() {
     if (result.token) {
       var form = document.getElementById('account-form');
       form.querySelector('input[name="token"]').setAttribute('value', result.token.id);
+
       form.submit();
     } else {
       errorElement.textContent = result.error.message;
