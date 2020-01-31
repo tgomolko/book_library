@@ -30,3 +30,10 @@ $(document).ready(function() {
     $(".navbar-menu").toggleClass("is-active");
   });
 });
+
+
+$(document).ready(function() {
+  $("#add").click(function() {
+    $("#add-card").toggleClass("active");
+  });
+});
