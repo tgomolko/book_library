@@ -6,7 +6,7 @@ class SubscriptionPresenter
   end
 
   def created_at
-    subscription.created_at.strftime("%d.%m.%Y, %H:%M")
+    subscription.created_at.localtime.strftime("%d.%m.%Y, %H:%M")
   end
 
   def plan_title
