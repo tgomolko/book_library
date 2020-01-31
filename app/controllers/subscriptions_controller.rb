@@ -23,6 +23,9 @@ class SubscriptionsController < ApplicationController
     end
   end
 
+  def show
+    @presenter = SubscriptionPresenter.new(@subscription)
+  end
 
   def destroy
     result = CancelSubscription.call(subscription: @subscription)
