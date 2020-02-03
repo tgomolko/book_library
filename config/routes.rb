@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get 'dashboard', to:'user_dashboard#dashboard'
   get 'dashboard/purchases', to: "user_dashboard#purchases"
 
+  get 'generate', to: "bills#generate", as: :generate_bill
+
   resources :products
   resources :plans
   resources :charges, only: [:new, :create]

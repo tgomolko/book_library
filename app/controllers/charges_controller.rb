@@ -7,6 +7,7 @@ class ChargesController < ApplicationController
 
     if result.success?
       redirect_to @book, notice: "Paid!"
+     # redirect_to generate_bill_path(id: result.charge, format: :pdf)
     else
       flash.now.alert = result.message
       render :new
