@@ -1,0 +1,125 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "bulma";
+@import 'bulma-extensions';
+
+.product-section{
+  box-shadow: 0 7px 14px 0 rgba(60,66,87, 0.12), 0 3px 6px 0 rgba(0,0,0, 0.12);
+  border: 1px solid #e3e8ee;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.fa{
+  margin-right: 8px;
+}
+
+.list:not(:last-child){
+  margin-bottom: 0;
+}
+
+.sub-text{
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.sub-title-text{
+  font-size: 18px;
+  font-weight: 400;
+  font-feature-settings: "pnum";
+  font-variant: proportional-nums;
+  color: #1a1f36;
+}
+
+.sub-title-small{
+  color: #697386;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-gap: 20px;
+}
+
+.fa.fa-download{
+  font-size: 30px;
+}
+
+.active-subs{
+  text-align: center;
+  border: 1px solid #7a7a7a;
+  border-radius: 4px;
+  margin: 4px;
+  padding: 15px;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
+}
+
+.image-logo{
+  width: 200px;
+}
+
+.custom-btn{
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  height: 40px;
+  background: rgb(0, 102, 240);
+  background-color: rgb(0, 102, 240);
+  border-radius: 22px 22px 22px 22px;
+  margin-top: 5px;
+  color: rgb(255, 255, 255);
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.product-price{
+  text-align: left;
+  color:
+  rgb(0, 0, 0);
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.product-name{
+  text-align: left;
+  color:
+  rgb(0, 0, 0);
+  font-size: 17px;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+.book:hover {
+  filter: brightness(110%);
+  transform: scale(1.03);
+  transition-property: all;
+  transition-duration: .9s;
+  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+
+.notifyjs-corner {
+  top: 70px !important;
+}
+
+.error.visible {
+  display: inline;
+}
+
+.error{
+  color: red;
+}

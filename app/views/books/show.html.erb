@@ -1,0 +1,49 @@
+<div class="section">
+<div id="success-payment"></div>
+<div id="charge-form"></div>
+  <div class="columns is-centered">
+    <div class="column is-2">
+      <%= image_tag @book.image.thumb.url if @book.image.url %>
+
+      <div class="columns">
+       <% if user_signed_in? && (@book.bought?(current_user) || current_user.has_library_access?)%>
+          <div class="column">
+            <%= render "books/book/attachment" %>
+          </div>
+        </div>
+        <% else %>
+
+          <div class="column">
+            <div class="product-price">$ <%= @book.price %></div>
+          </div>
+          <div class="column">
+            <%= link_to "Buy now", new_charge_path(format: :js, book_id: @book), remote: true, class: "button custom-btn"  %>
+          </div>
+      </div>
+        <div class="columns">
+          <div class="column">
+            <%= link_to "Read by subscription", pricing_path, class: "button is-fullwidth custom-btn"  %>
+          </div>
+        </div>
+
+      <% end %>
+
+      <div class="columns">
+        <div class="column ">
+          <%= render "books/book/actions", book: @book %>
+        </div>
+      </div>
+    </div>
+
+    <div class="column is-4">
+      <h1 class="title is-3"><%= @book.title %></h1>
+      <p><strong>Description:</strong></p>
+        <%= @book.description %>
+      <p><strong>Author:</strong></p>
+        <%= @book.author %>
+      <p>
+      </p>
+    </div>
+  </div>
+</div>
+

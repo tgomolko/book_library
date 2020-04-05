@@ -26,6 +26,20 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem 'devise', '~> 4.7'
+gem 'bulma-rails', '~> 0.8.0'
+gem 'simple_form', '~> 5.0'
+gem 'stripe', '~> 5.12'
+gem 'bulma-extensions-rails'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'carrierwave', '~> 2.0'
+gem 'mini_magick', '>= 4.9.5'
+gem "paperclip", '~> 6.1'
+gem 'paperclip-ghostscript', '~> 0.1.0'
+gem 'interactor', '~> 3.1'
+gem 'friendly_id', '~> 5.2.4'
+gem 'receipts', '~> 0.2.3'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
@@ -39,6 +53,10 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails', '~> 3.9'
+  gem 'factory_bot_rails', '~> 5.1'
+  gem 'pry'
+  gem 'rails-controller-testing', '~> 1.0'
 end
 
 group :development do
@@ -48,6 +66,9 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'better_errors'
+  gem 'guard'
+  gem 'guard-livereload'
 end
 
 group :test do

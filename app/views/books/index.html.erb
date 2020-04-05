@@ -1,0 +1,18 @@
+<div class="hero-body">
+  <div class="container has-text-centered">
+    <h1 class="title">
+      <i class="fa fa-book"></i> Book Library
+    </h1>
+    <h2 class="subtitle">
+      Check out some of the latest titles
+    </h2>
+  </div>
+<%#= render file: "pricing/index", plans: @plans %>
+</div>
+
+
+<section class="section">
+  <div class="book-grid">
+    <%= render @books %>
+  </div>
+</section>

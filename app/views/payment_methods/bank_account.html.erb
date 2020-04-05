@@ -1,0 +1,45 @@
+<section class="section">
+  <div class="columns is-centered">
+
+    <div class="column is-6 product-section">
+
+      <p class="is-pulled-left">Bank Account</p>
+
+    </div>
+  </div>
+
+  <div class="columns is-centered">
+    <div class="column is-6 product-section">
+
+      <p class="title is-5">Details
+        <%= link_to remove_card_path(@bank_account), method: :delete, title: "deattach card", data: { confirm: "Are you sure "} do %>
+          <span class="is-pulled-right"><i class="fa fa-trash fa" aria-hidden="true"></i></span>
+        <% end %>
+        <%= link_to "verify","#" %>
+      </p>
+
+      <hr/>
+
+      <div class="columns">
+        <div class="column is-2">
+          <p>Created</p>
+        </div>
+        <div class="column">
+          ****<%= @bank_account.created_at.strftime("%d/%m/%Y, %H:%M") %>
+        </div>
+      </div>
+
+      <div class="columns">
+        <div class="column is-2">
+          <p>ID</p>
+        </div>
+        <div class="column">
+          <%= @bank_account.stripe_id %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  </div>
+</section>
