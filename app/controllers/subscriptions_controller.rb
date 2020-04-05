@@ -3,6 +3,12 @@ class SubscriptionsController < ApplicationController
   before_action :load_plan, only: [:new, :create]
   before_action :load_subscription, only: [:show, :destroy]
 
+  def new
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def index
     @subscriptions = current_user.subscriptions.order("created_at DESC")
   end

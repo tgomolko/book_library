@@ -31,9 +31,28 @@ $(document).ready(function() {
   });
 });
 
-
 $(document).ready(function() {
   $("#add").click(function() {
     $("#add-card").toggleClass("active");
+  });
+});
+
+$(document).ready (function () {
+   $(document).on("click", "#del", function(){
+    $(".modal").toggleClass("is-active");
+  });
+});
+
+$(document).ready (function () {
+   $(document).on("click", ".modal-background", function(){
+    $(".modal").toggleClass("is-active");
+  });
+});
+
+$(document).ready(function () {
+  $(document).keydown(function(e){
+    if(e.keyCode == 27) {
+      $(".modal").toggleClass("is-active");
+    }
   });
 });

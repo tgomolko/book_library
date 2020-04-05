@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   resources :products
   resources :plans
   resources :charges, only: [:new, :create]
+
+  get 'payment_success', to: "charges#success", as: :success_payment
+
   get  'pricing', to: "pricing#index"
   resources :subscriptions
 

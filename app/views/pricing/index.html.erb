@@ -1,4 +1,6 @@
 <section class="section">
+  <div id="subscription-form"></div>
+  <div id="success-payment"></div>
   <div class="has-text-centered box">
     <h1 class="title">Pricing</h1>
     <h2 class="subtitle">Choose the best plan that matches your reading consistency and budget.</h2>
@@ -15,7 +17,7 @@
                 <div class="plan-item">Duration one <%= plan.interval %> </div>
               </div>
               <div class="plan-footer">
-                <%= link_to "Subscribe", new_subscription_path(plan_id: plan.id), class: "button is-primary is-rounded" %>
+                <%= link_to "Subscribe", new_subscription_path(format: :js, plan_id: plan.id), remote: true,  class: "button is-primary is-rounded" %>
               </div>
           </div>
         <% end %>

@@ -1,5 +1,6 @@
 <div class="section">
-
+<div id="success-payment"></div>
+<div id="charge-form"></div>
   <div class="columns is-centered">
     <div class="column is-2">
       <%= image_tag @book.image.thumb.url if @book.image.url %>
@@ -16,7 +17,7 @@
             <div class="product-price">$ <%= @book.price %></div>
           </div>
           <div class="column">
-            <%= link_to "Buy now", new_charge_path(book_id: @book), class: "button custom-btn"  %>
+            <%= link_to "Buy now", new_charge_path(format: :js, book_id: @book), remote: true, class: "button custom-btn"  %>
           </div>
       </div>
         <div class="columns">
@@ -44,6 +45,5 @@
       </p>
     </div>
   </div>
-
 </div>
 

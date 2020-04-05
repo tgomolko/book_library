@@ -1,4 +1,4 @@
-document.addEventListener("turbolinks:load", function() {
+function showPaymentForm () {
   const publishableKey = "pk_test_WinUnLY18E0n0McRfBTLcnEn";
   const stripe = Stripe(publishableKey);
 
@@ -75,7 +75,8 @@ document.addEventListener("turbolinks:load", function() {
     hiddenInput.setAttribute('value', token.card[field]);
     form.appendChild(hiddenInput);
   }
-});
+
+};
 
 document.addEventListener("turbolinks:load", function() {
 
@@ -157,3 +158,5 @@ document.addEventListener("turbolinks:load", function() {
 
   });
 });
+
+
