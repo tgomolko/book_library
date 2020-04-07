@@ -1,4 +1,4 @@
-require_dependency("cancel")
+require_dependency("#{Rails.root}/lib/services/stripe/subscriptions/cancel")
 
 class CancelSubscription
   include Interactor

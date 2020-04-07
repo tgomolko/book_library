@@ -2,6 +2,7 @@ class SubscriptionsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_plan, only: [:new, :create]
   before_action :load_subscription, only: [:show, :destroy]
+  protect_from_forgery except: :new
 
   def new
     respond_to do |format|

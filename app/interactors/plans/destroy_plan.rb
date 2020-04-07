@@ -1,4 +1,4 @@
-require_dependency("destroy")
+require_dependency("#{Rails.root}/lib/services/stripe/plans/destroy")
 
 class DestroyPlan
   include Interactor

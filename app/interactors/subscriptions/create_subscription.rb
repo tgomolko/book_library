@@ -1,4 +1,4 @@
-require_dependency("create")
+require_dependency("#{Rails.root}/lib/services/stripe/subscription/create")
 
 class CreateSubscription
   include Interactor

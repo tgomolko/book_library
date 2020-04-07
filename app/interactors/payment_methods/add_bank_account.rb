@@ -1,4 +1,4 @@
-require_dependency("add_bank_account")
+require_dependency("#{Rails.root}/lib/services/stripe/payment_methods/add_bank_account")
 
 class AddBankAccount
   include Interactor

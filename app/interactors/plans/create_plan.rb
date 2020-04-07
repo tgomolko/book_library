@@ -1,4 +1,4 @@
-require_dependency("create")
+require_dependency("#{Rails.root}/lib/services/stripe/plans/create")
 
 class CreatePlan
   include Interactor

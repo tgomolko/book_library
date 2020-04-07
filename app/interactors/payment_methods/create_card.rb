@@ -1,4 +1,4 @@
-require_dependency("create")
+require_dependency("#{Rails.root}/lib/services/stripe/payment_methods/create")
 
 class CreateCard
   include Interactor
