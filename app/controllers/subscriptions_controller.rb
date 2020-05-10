@@ -25,8 +25,8 @@ class SubscriptionsController < ApplicationController
     if result.success?
       redirect_to result.subscription, notice: "You was successfully subsribed"
     else
-      flash.now.alert = result.message
-      render :new
+     # flash.now.alert = result.message
+      redirect_to pricing_path, alert: "#{result.message}"
     end
   end
 

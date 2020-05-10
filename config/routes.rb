@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   get 'payment_success', to: "charges#success", as: :success_payment
 
-  get  'pricing', to: "pricing#index"
+  get  'pricing', to: "pricing#index", as: :pricing
   resources :subscriptions
 
   get '/card/new' => "payment_methods#new_card", as: :add_payment_method
@@ -29,5 +29,4 @@ Rails.application.routes.draw do
   get '/cards' => "payment_methods#cards", as: :cards
   post "/bank_account" => "payment_methods#add_bank_account", as: :add_bank_account
   get "/bank_account/:id" => "payment_methods#bank_account", as: :bank_account
-
 end

@@ -17,7 +17,11 @@
                 <div class="plan-item">Duration one <%= plan.interval %> </div>
               </div>
               <div class="plan-footer">
+                <% if current_user %>
                 <%= link_to "Subscribe", new_subscription_path(format: :js, plan_id: plan.id), remote: true,  class: "button is-primary is-rounded" %>
+                <% else %>
+                <%= link_to "Sing Up", new_user_registration_path,  class: "button is-primary is-rounded" %>
+                <% end %>
               </div>
           </div>
         <% end %>

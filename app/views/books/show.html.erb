@@ -17,7 +17,7 @@
             <div class="product-price">$ <%= @book.price %></div>
           </div>
           <div class="column">
-            <%= link_to "Buy now", new_charge_path(format: :js, book_id: @book), remote: true, class: "button custom-btn"  %>
+            <%= link_to "Buy now", new_charge_path(format: :js, book_id: @book), remote: true, class: "button custom-btn" if current_user %>
           </div>
       </div>
         <div class="columns">
